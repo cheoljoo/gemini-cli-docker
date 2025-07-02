@@ -1,0 +1,28 @@
+{
+      "theme": "Default",
+      "selectedAuthType": "gemini-api-key",
+      "mcpServers": {
+        "playwright-stealth": {
+          "command": "npx",
+          "args": ["-y", "@pvinis/playwright-stealth-mcp-server"]
+        },
+        "youtube": {
+            "command": "npx",
+            "args": ["-y", "youtube-data-mcp-server"],
+            "env": {
+              "YOUTUBE_API_KEY": "[your-youtube-api-key]",
+              "YOUTUBE_TRANSCRIPT_LANG": "ko"
+            }
+        },
+        "github": {
+            "command": "npx",
+            "args": [
+              "-y",
+              "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+              "GITHUB_TOKEN": "[your-github-token]"
+            }
+        }
+      }  
+}
