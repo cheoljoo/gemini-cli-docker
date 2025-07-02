@@ -23,6 +23,15 @@
             "env": {
               "GITHUB_TOKEN": "[your-github-token]"
             }
+        },
+        "supabase": {
+            "command": "npx",
+            "args": [
+              "-y",
+              "@supabase/mcp-server-supabase@latest",
+              "--access-token",
+              "<personal-access-token>"
+            ]
         }
-      }  
+     }  
 }
