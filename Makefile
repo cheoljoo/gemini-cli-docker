@@ -13,5 +13,7 @@ all:
 	 #docker run -it --rm --name gemini-container2 -v $$PWD:/usr/src/app  --user `id -u`:`id -g`  gemini-app
 build:
 	 docker build --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
+build-no-cache:
+	 docker build --no-cache --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
 sh: 
 	 docker run -it --rm -v ./:/usr/src/app  -e GEMINI_API_KEY=AIzaSyB647F_VzNA0tT8kacPMLTbL62EWEChmyw gemini-app /bin/bash
