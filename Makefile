@@ -16,4 +16,4 @@ build:
 build-no-cache:
 	 docker build --no-cache --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
 sh: 
-	 docker run -it --rm -v ./:/usr/src/app  -e GEMINI_API_KEY=AIzaSyB647F_VzNA0tT8kacPMLTbL62EWEChmyw gemini-app /bin/bash
+	 docker run -it --rm -v ./:/usr/src/app  -e GEMINI_API_KEY=your_api_key gemini-app /bin/bash
