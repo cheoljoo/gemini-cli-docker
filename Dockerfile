@@ -10,6 +10,7 @@ WORKDIR /usr/src/app
 # 글로벌로 gemini-cli를 설치합니다.
 RUN npm install -g @google/gemini-cli
 RUN npm install youtube-data-mcp-server
+RUN npm install -g @anthropic-ai/claude-code
 
 
 # Playwright 설치 및 브라우저 설치
