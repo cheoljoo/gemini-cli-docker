@@ -7,13 +7,18 @@ PROMPT ?=
 FILE ?=
 
 all: 
-	 $(if $(FILE), \
-		 docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY=your_key gemini-app gemini -y -p "$$(cat $(FILE))", \
-		 docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY=your_key gemini-app gemini -y $(if $(PROMPT),-p "$(PROMPT)"))
-	 #docker run -it --rm --name gemini-container2 -v $$PWD:/usr/src/app  --user `id -u`:`id -g`  gemini-app
+	if [ ! -f gemini.key ]; then \
+		echo "gemini.key 파일이 없습니다. vi로 파일을 만드세요."; \
+		vi gemini.key; \
+		echo "rerun make"; \
+        exit;       \
+	fi; \
+	$(if $(FILE), \
+		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini -y -p "$$(cat $(FILE))", \
+		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini $(if $(PROMPT),-p "$(PROMPT)"))
 build:
-	 docker build --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
+	docker build --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
 build-no-cache:
-	 docker build --no-cache --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
+	docker build --no-cache --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
 sh: 
-	 docker run -it --rm -v ./:/usr/src/app  -e GEMINI_API_KEY=your-key gemini-app /bin/bash
+	docker run -it --rm -v ./:/usr/src/app  -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app /bin/bash
