@@ -14,8 +14,8 @@ all:
         exit;       \
 	fi; \
 	$(if $(FILE), \
-		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini -y -p "$$(cat $(FILE))", \
-		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini $(if $(PROMPT),-p "$(PROMPT)"))
+		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini --model gemini-2.5-flash -y -p "$$(cat $(FILE))", \
+		docker run -it --rm -v ./:/usr/src/app -e GEMINI_API_KEY="$(shell cat gemini.key)" gemini-app gemini --model gemini-2.5-flash $(if $(PROMPT),-p "$(PROMPT)"))
 build:
 	docker build --build-arg USER_ID=$(USER_ID) --build-arg GROUP_ID=$(GROUP_ID) -t gemini-app .
 build-no-cache:
